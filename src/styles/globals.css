@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════
+   ACCENT COLORS
+   ══════════════════════════════════════════════ */
+
+[data-accent="violet"] {
+  --accent:      #7c6aff;
+  --accent2:     #a78bfa;
+  --accent-glow: #7c6aff25;
+  --accent-soft: #7c6aff12;
+  --accent-tint: #7c6aff08;
+}
+[data-accent="blue"] {
+  --accent:      #3b82f6;
+  --accent2:     #60a5fa;
+  --accent-glow: #3b82f625;
+  --accent-soft: #3b82f612;
+  --accent-tint: #3b82f608;
+}
+[data-accent="green"] {
+  --accent:      #10b981;
+  --accent2:     #34d399;
+  --accent-glow: #10b98125;
+  --accent-soft: #10b98112;
+  --accent-tint: #10b98108;
+}
+[data-accent="orange"] {
+  --accent:      #f59e0b;
+  --accent2:     #fbbf24;
+  --accent-glow: #f59e0b25;
+  --accent-soft: #f59e0b12;
+  --accent-tint: #f59e0b08;
+}
+[data-accent="pink"] {
+  --accent:      #ec4899;
+  --accent2:     #f472b6;
+  --accent-glow: #ec489925;
+  --accent-soft: #ec489912;
+  --accent-tint: #ec489908;
+}
+[data-accent="red"] {
+  --accent:      #ef4444;
+  --accent2:     #f87171;
+  --accent-glow: #ef444425;
+  --accent-soft: #ef444412;
+  --accent-tint: #ef444408;
+}
+[data-accent="silver"] {
+  --accent:      #94a3b8;
+  --accent2:     #cbd5e1;
+  --accent-glow: #94a3b825;
+  --accent-soft: #94a3b812;
+  --accent-tint: #94a3b808;
+}
+
+/* ══════════════════════════════════════════════
+   DARK MODE (default)
+   ══════════════════════════════════════════════ */
+:root {
+  --accent:      #7c6aff;
+  --accent2:     #a78bfa;
+  --accent-glow: #7c6aff25;
+  --accent-soft: #7c6aff12;
+  --accent-tint: #7c6aff08;
+
+  --bg:           #09090f;
+  --surface:      #0f0f1b;
+  --card:         #15152a;
+  --border:       #2a2a45;
+  --text:         #e8e8f5;
+  --muted:        #6b6b90;
+  --shadow:       rgba(0,0,0,0.5);
+
+  /* Tinte de acento en surfaces */
+  --bg-tinted:      color-mix(in srgb, var(--accent-tint) 100%, #09090f);
+  --surface-tinted: color-mix(in srgb, var(--accent-tint) 100%, #0f0f1b);
+}
+
+/* ══════════════════════════════════════════════
+   LIGHT MODE
+   ══════════════════════════════════════════════ */
+[data-theme="light"] {
+  --bg:           #f5f5fd;
+  --surface:      #ffffff;
+  --card:         #ebebf8;
+  --border:       #d5d5ee;
+  --text:         #111128;
+  --muted:        #6868a0;
+  --shadow:       rgba(0,0,0,0.08);
+
+  --bg-tinted:      color-mix(in srgb, var(--accent-soft) 40%, #f5f5fd);
+  --surface-tinted: color-mix(in srgb, var(--accent-soft) 20%, #ffffff);
+}
+
+/* ══════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════ */
+   @layer base {
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  
+    html, body, #root {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+  
+    input, textarea, webview, select {
+      -webkit-user-select: text;
+      user-select: text;
+    }
+  
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+  
+    ::-webkit-scrollbar       { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: var(--surface); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  
+    select option {
+      background: var(--card);
+      color: var(--text);
+    }
+  }
+
+/* ══════════════════════════════════════════════
+   COMPONENTS
+   ══════════════════════════════════════════════ */
+@layer components {
+
+  .nova-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .nova-card-hover:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
+  }
+
+  .nova-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    color: var(--text);
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  .nova-input:focus { border-color: var(--accent); }
+  .nova-input::placeholder { color: var(--muted); }
+
+  .nova-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.15s;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+  .nova-btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+  .nova-btn-primary:hover { opacity: 0.85; }
+
+  .nova-btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid transparent;
+  }
+  .nova-btn-ghost:hover {
+    background: var(--card);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .nova-btn-soft {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--accent-glow);
+  }
+  .nova-btn-soft:hover { background: var(--accent-glow); }
+
+  .sidebar-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--muted);
+  }
+  .sidebar-icon:hover {
+    background: var(--card);
+    color: var(--text);
+    border-color: var(--border);
+  }
+  .sidebar-icon-active {
+    background: var(--card) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  .accent-text   { color: var(--accent); }
+  .accent-bg     { background-color: var(--accent); }
+  .accent-soft   { background-color: var(--accent-soft); }
+  .accent-border { border-color: var(--accent); }
+  .accent-glow   { box-shadow: 0 0 15px var(--accent-glow); }
+
+  .theme-bg      { background-color: var(--bg); }
+  .theme-surface { background-color: var(--surface); }
+  .theme-card    { background-color: var(--card); }
+  .theme-border  { border-color: var(--border); }
+  .theme-text    { color: var(--text); }
+  .theme-muted   { color: var(--muted); }
+
+  /* Tinted surfaces — sutil tinte de acento */
+  .surface-tinted { background-color: var(--surface-tinted); }
+  .bg-tinted      { background-color: var(--bg-tinted); }
+
+  .progress-bar { height: 4px; background: var(--border); border-radius: 9999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 9999px; transition: width 0.3s; }
+
+  .nova-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--accent-glow);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   TITLEBAR & WEBVIEW
+   ══════════════════════════════════════════════ */
+.titlebar-drag    { -webkit-app-region: drag; }
+.titlebar-no-drag { -webkit-app-region: no-drag; }
+
+webview {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Transición suave al cambiar tema */
+*, *::before, *::after {
+  transition: background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.15s ease;
+}
+webview, img, video {
+  transition: none !important;
+}

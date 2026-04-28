@@ -1,0 +1,75 @@
+{
+  "name": "nova-browser",
+  "version": "1.0.0",
+  "description": "NOVA Personal Browser Suite",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"pnpm run dev:vite\" \"pnpm run dev:electron\"",
+    "dev:vite": "vite",
+    "dev:electron": "wait-on tcp:5173 && electron .",
+    "postinstall": "npm install electron@28 --save-dev",
+    "build": "vite build && electron-builder",
+    "build:vite": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.0",
+    "concurrently": "^8.0.0",
+    "cross-env": "^7.0.0",
+    "electron": "^28.3.3",
+    "electron-builder": "^24.0.0",
+    "esbuild": "^0.28.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "vite": "^5.4.21",
+    "wait-on": "^7.0.0"
+  },
+  "dependencies": {
+    "@cliqz/adblocker-electron": "^1.34.0",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-slider": "^1.3.6",
+    "@radix-ui/react-switch": "^1.2.6",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@radix-ui/react-tooltip": "^1.2.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cross-fetch": "^4.1.0",
+    "electron-store": "^8.2.0",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.400.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "tailwind-merge": "^3.5.0",
+    "zustand": "^4.0.0"
+  },
+  "build": {
+    "appId": "com.nova.browser",
+    "productName": "NOVA Browser",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "public/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/icons/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "pnpm": {
+      "onlyBuiltDependencies": [
+        "electron",
+        "esbuild",
+        "@cliqz/adblocker-electron"
+      ]
+    }
+  }
+}
